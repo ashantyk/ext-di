@@ -3,6 +3,7 @@
 
 [![npm version](https://badge.fury.io/js/ext-di.svg)](https://badge.fury.io/js/ext-di)
 [![Build Status](https://travis-ci.org/ashantyk/ext-di.svg?branch=master)](https://travis-ci.org/ashantyk/ext-di)
+[![Coverage Status](https://coveralls.io/repos/github/ashantyk/ext-di/badge.svg?branch=master)](https://coveralls.io/github/ashantyk/ext-di?branch=master)
 
 ## Features
 
@@ -15,13 +16,13 @@
 Firstly, install it:
 
 ```bash
-npm install --save injector
+npm install ext-di --save
 ```
 
 Use it like this
 
 ```js
-const Injector = require('ext-di').Injector;
+const Injector = require('ext-di');
 let injector = new Injector({ 'redis' : { module : 'ioredis', className : 'Redis' }});
 ```
 
@@ -29,11 +30,11 @@ let injector = new Injector({ 'redis' : { module : 'ioredis', className : 'Redis
 
 ##### `constructor(config)`
   
-- `config.ALIAS_NAME` The alis name for the class
+- `config.ALIAS_NAME` The alias name for the class/module
 - `config.ALIAS_NAME.module` This value will be used for 'require'
 - `config.ALIAS_NAME.className` The actual class name *( leave empty if not used )*
 - `config.ALIAS_NAME.params` The list of params for this instance of the class *( leave empty if not used )*
-- `config.ALIAS_NAME.instantiate` Should the Injector create a __new__ instance of the 'class' *( leave empty if not used )*
+- `config.ALIAS_NAME.instantiate` Should the injector create a __new__ instance of the 'class' *( leave empty if not used )*
 
 |Options|Effect|
 |:---|---:|
@@ -52,7 +53,7 @@ let injector = new Injector({ 'redis' : { module : 'ioredis', className : 'Redis
 class Complex {
 
     async getNr() {
-        let nativeService = await this.getService('native')
+        let nativeService = await this.getService('native');
         return nativeService.nr;
     }
 
