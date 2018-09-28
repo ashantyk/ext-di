@@ -4,19 +4,26 @@
   "description": "EXT - Depedency Injector",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info && rmdir coverage /s /q"
   },
-  "author": "gbarbieru@bitdefender.com",
+  "author": "Gabriel Barbieru <gbarbieru@bitdefender.com>",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ashantyk/ext-di"
+    "type": "git",
+    "url": "https://github.com/ashantyk/ext-di"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
   },
   "dependencies": {
     "clone": "^2.1.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^3.5.3"
+    "coveralls": "^3.0.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0"
   }
 }
