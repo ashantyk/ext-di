@@ -1,4 +1,6 @@
 # _**EXT DI (EXT Dependency Injector)**_
+[![NPM](https://nodei.co/npm/ext-di.png)](https://nodei.co/npm/ext-di/)
+
 
 ## Features
 
@@ -17,23 +19,23 @@ npm install --save injector
 Use it like this
 
 ```js
-const Injector = require('injector');
+const Injector = require('ext-di').Injector;
 let injector = new Injector({ 'redis' : { module : 'ioredis', className : 'Redis' }});
 ```
 
 #### API
 
-##### `constructor(options)`
+##### `constructor(config)`
   
-- `options.ALIAS_NAME` The alis name for the class 
-- `options.ALIAS_NAME.module` This value will be used for 'require'
-- `options.ALIAS_NAME.className` The actual class name *( leave empty if not used )*
-- `options.ALIAS_NAME.params` The list of params for this instance of the class *( leave empty if not used )*
-- `options.ALIAS_NAME.instantiate` Should the Injector create a __new__ instance of the 'class' *( leave empty if not used )*
+- `config.ALIAS_NAME` The alis name for the class
+- `config.ALIAS_NAME.module` This value will be used for 'require'
+- `config.ALIAS_NAME.className` The actual class name *( leave empty if not used )*
+- `config.ALIAS_NAME.params` The list of params for this instance of the class *( leave empty if not used )*
+- `config.ALIAS_NAME.instantiate` Should the Injector create a __new__ instance of the 'class' *( leave empty if not used )*
 
 |Options|Effect|
 |:---|---:|
-|`{"alias": console}`|This will __directly use__ the given module|
+|`{"alias": "fs"}`|This will __directly use__ the given module|
 |`{"alias": {"module": 'm'}}`|__require('m')__| 
 |`{"alias": {"module": "m", "instantiate": true}}`|__new require('m')()__|
 |`{"alias": {"module": 'm', "className": 'C'}}`|__require('m').C__|
@@ -43,21 +45,13 @@ let injector = new Injector({ 'redis' : { module : 'ioredis', className : 'Redis
   
 - `aliasName` string The alias name for the class. It will be instantiated using the configured params
 
-__The modules need to have a new method named *needs* that must return an array of strings.__
-
-Each element in that array must have a definition when instantiating the "Injector" module ( must have an alias defined ).
-The 'needs' method should be static for performance reasons.
-
 ```javascript
 /** complex.js **/
 class Complex {
 
-    getNr() {
-        return this.native.nr;
-    }
-
-    static needs() {
-        return ['native'];
+    async getNr() {
+        let nativeService = await this.getService('native')
+        return nativeService.nr;
     }
 
 }
@@ -73,6 +67,6 @@ let injector = new Injector({
     'native': {module: 'native.js'}
 });
 
-let complex = injector.get('complex');
+let complex = await injector.get('complex');
 complex.getNr();
 ```

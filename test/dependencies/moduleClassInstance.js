@@ -2,12 +2,14 @@ function TestModuleClassInstance() {
 
 }
 
-TestModuleClassInstance.prototype.needs = function() {
-    return ['fn', 'native', 'other', 'utils'/*, 'logger', 'process'*/];
-};
+TestModuleClassInstance.prototype.getResult = async function() {
 
-TestModuleClassInstance.prototype.getResult = function() {
-    return this.process.pid + 3 * this.func(0, this.native.nr, this.other.array.reduce((left, nr) => {return left + nr;},0));
+    let native = await this.getService('native');
+    let fn = await this.getService('fn');
+    let other = await this.getService('other');
+
+    return 3 * fn(0, native.nr, other.array.reduce((left, nr) => {return left + nr;}, 0));
+
 };
 
 module.exports.TestModuleClassInstance = TestModuleClassInstance;

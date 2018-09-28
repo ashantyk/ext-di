@@ -1,8 +1,8 @@
 const path = require('path');
 const expect = require('chai').expect;
-const Manager = require(path.join(__dirname, '../lib/manager.js'));
+const Injector = require('../lib/injector.js');
 
-describe('Manager', () => {
+describe('Injector', () => {
 
     describe('#constructor', () => {
 
@@ -39,7 +39,7 @@ describe('Manager', () => {
         negativeTests.forEach(function (test) {
             it('should throw ' + test.expected, function () {
                 expect(function () {
-                    let injector = new Manager(test.args);
+                    let injector = new Injector(test.args);
                 }).to.throw(TypeError, test.expected);
             });
         });
@@ -55,7 +55,7 @@ describe('Manager', () => {
         positiveTests.forEach(function (test) {
             it('should not throw ' + JSON.stringify(test.args), function () {
                 expect(function () {
-                    let injector = new Manager(test.args);
+                    let injector = new Injector(test.args);
                 }).not.to.throw(Error);
             });
         });
@@ -97,7 +97,7 @@ describe('Manager', () => {
                 },
                 name: 'mock',
                 method: "getResult",
-                expected: process.pid + 124035,
+                expected: 247491, //process.pid + 124035,
                 ctor: "TestModuleInstance"
             },
             {
@@ -115,7 +115,7 @@ describe('Manager', () => {
                 },
                 name: 'mock',
                 method: "getResult",
-                expected: process.pid + 2 * 124035,
+                expected: 248070,
                 ctor: "TestModuleClass"
             },
             {
@@ -134,14 +134,14 @@ describe('Manager', () => {
                 },
                 name: 'mock',
                 method: "getResult",
-                expected: process.pid + 3 * 124035,
+                expected: 372105,
                 ctor: "TestModuleClassInstance"
             }
         ];
 
         positiveTests.forEach(function (test) {
             it('should create the module ' + test.name + `(${test.ctor})` + ' run ' + test.method + ' and return ' + test.expected, async function () {
-                let injector = new Manager(test.args);
+                let injector = new Injector(test.args);
                 const instance = await injector.get(test.name);
                 expect(instance.constructor.name + "").to.equal(test.ctor);
                 const result = await instance[test.method]();
