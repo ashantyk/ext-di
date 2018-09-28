@@ -25,5 +25,12 @@
     "mocha-lcov-reporter": "^1.3.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0"
-  }
+  },
+  "keywords": [
+    "dependency",
+    "injector",
+    "dependency injector",
+    "service injector",
+    "dependencies"
+  ]
 }
