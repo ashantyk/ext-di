@@ -14,7 +14,7 @@
     "url": "https://github.com/ashantyk/ext-di"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 10.0.0"
   },
   "dependencies": {
     "clone": "^2.1.2"
