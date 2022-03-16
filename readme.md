@@ -2,7 +2,7 @@
 [![NPM](https://nodei.co/npm/ext-di.png)](https://nodei.co/npm/ext-di/)
 
 [![npm version](https://badge.fury.io/js/ext-di.svg)](https://badge.fury.io/js/ext-di)
-[![Build Status](https://travis-ci.org/ashantyk/ext-di.svg?branch=master)](https://travis-ci.org/ashantyk/ext-di)
+[![Build Status](https://travis-ci.com/ashantyk/ext-di.svg?branch=master)](https://travis-ci.org/ashantyk/ext-di)
 [![Coverage Status](https://coveralls.io/repos/github/ashantyk/ext-di/badge.svg?branch=master)](https://coveralls.io/github/ashantyk/ext-di?branch=master)
 
 ## Features
