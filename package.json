@@ -1,6 +1,6 @@
 {
   "name": "ext-di",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "EXT - Depedency Injector",
   "main": "index.js",
   "scripts": {
